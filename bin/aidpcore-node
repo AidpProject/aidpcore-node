@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+var aidpcore = require('../lib/cli/aidpcore');
+aidpcore();

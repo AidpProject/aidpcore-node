@@ -1,5 +1,5 @@
 {
-  "name": "aidpcore-node",
+  "name": "aidpcorenode",
   "description": "Full node with extended capabilities using aidpcore and Aidpcoin",
   "author": "Under",
   "version": "1.0.3",

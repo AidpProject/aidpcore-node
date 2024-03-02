@@ -1,15 +1,15 @@
-Ravencore'use strict';
+Aidpcore'use strict';
 
 var benchmark = require('benchmark');
-var ravencoin = require('ravencoin');
+var aidpcoin = require('aidpcoin');
 var async = require('async');
 var maxTime = 20;
 
-console.log('Ravencoin Service native interface vs. Ravencoin JSON RPC interface');
+console.log('Aidpcoin Service native interface vs. Aidpcoin JSON RPC interface');
 console.log('----------------------------------------------------------------------');
 
-// To run the benchmarks a fully synced Ravencoin directory is needed. The RPC comands
-// can be modified to match the settings in raven.conf.
+// To run the benchmarks a fully synced Aidpcoin directory is needed. The RPC comands
+// can be modified to match the settings in aidp.conf.
 
 var fixtureData = {
   blockHashes: [
@@ -26,34 +26,34 @@ var fixtureData = {
   ]
 };
 
-var ravend = require('../').services.Ravencoin({
+var aidpd = require('../').services.Aidpcoin({
   node: {
-    datadir: process.env.HOME + '/.raven',
+    datadir: process.env.HOME + '/.aidp',
     network: {
       name: 'testnet'
     }
   }
 });
 
-ravend.on('error', function(err) {
+aidpd.on('error', function(err) {
   console.error(err.message);
 });
 
-ravend.start(function(err) {
+aidpd.start(function(err) {
   if (err) {
     throw err;
   }
-  console.log('Ravencoin started');
+  console.log('Aidpcoin started');
 });
 
-ravend.on('ready', function() {
+aidpd.on('ready', function() {
 
-  console.log('Ravencoin ready');
+  console.log('Aidpcoin ready');
 
-  var client = new ravencoin.Client({
+  var client = new aidpcoin.Client({
     host: 'localhost',
     port: 18332,
-    user: 'raven',
+    user: 'aidp',
     pass: 'local321'
   });
 
@@ -64,12 +64,12 @@ ravend.on('ready', function() {
       var hashesLength = fixtureData.blockHashes.length;
       var txLength = fixtureData.txHashes.length;
 
-      function ravendGetBlockNative(deffered) {
+      function aidpdGetBlockNative(deffered) {
         if (c >= hashesLength) {
           c = 0;
         }
         var hash = fixtureData.blockHashes[c];
-        ravend.getBlock(hash, function(err, block) {
+        aidpd.getBlock(hash, function(err, block) {
           if (err) {
             throw err;
           }
@@ -78,7 +78,7 @@ ravend.on('ready', function() {
         c++;
       }
 
-      function ravendGetBlockJsonRpc(deffered) {
+      function aidpdGetBlockJsonRpc(deffered) {
         if (c >= hashesLength) {
           c = 0;
         }
@@ -92,12 +92,12 @@ ravend.on('ready', function() {
         c++;
       }
 
-      function ravenGetTransactionNative(deffered) {
+      function aidpGetTransactionNative(deffered) {
         if (c >= txLength) {
           c = 0;
         }
         var hash = fixtureData.txHashes[c];
-        ravend.getTransaction(hash, true, function(err, tx) {
+        aidpd.getTransaction(hash, true, function(err, tx) {
           if (err) {
             throw err;
           }
@@ -106,7 +106,7 @@ ravend.on('ready', function() {
         c++;
       }
 
-      function ravenGetTransactionJsonRpc(deffered) {
+      function aidpGetTransactionJsonRpc(deffered) {
         if (c >= txLength) {
           c = 0;
         }
@@ -122,22 +122,22 @@ ravend.on('ready', function() {
 
       var suite = new benchmark.Suite();
 
-      suite.add('ravend getblock (native)', ravendGetBlockNative, {
+      suite.add('aidpd getblock (native)', aidpdGetBlockNative, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('ravend getblock (json rpc)', ravendGetBlockJsonRpc, {
+      suite.add('aidpd getblock (json rpc)', aidpdGetBlockJsonRpc, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('ravend gettransaction (native)', ravenGetTransactionNative, {
+      suite.add('aidpd gettransaction (native)', aidpGetTransactionNative, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('ravend gettransaction (json rpc)', ravenGetTransactionJsonRpc, {
+      suite.add('aidpd gettransaction (json rpc)', aidpGetTransactionJsonRpc, {
         defer: true,
         maxTime: maxTime
       });
@@ -158,7 +158,7 @@ ravend.on('ready', function() {
       throw err;
     }
     console.log('Finished');
-    ravend.stop(function(err) {
+    aidpd.stop(function(err) {
       if (err) {
         console.error('Fail to stop services: ' + err);
         process.exit(1);

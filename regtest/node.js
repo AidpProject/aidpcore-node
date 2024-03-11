@@ -15,7 +15,7 @@ var node;
 
 var should = chai.should();
 
-var AidpcoinRPC = require('aidpd-rpc');
+var AidpcoinRPC = require('aidpcoin-rpc');
 var index = require('..');
 var Transaction = aidpcore.Transaction;
 var AidpcoreNode = index.Node;

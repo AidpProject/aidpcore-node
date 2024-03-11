@@ -6,23 +6,11 @@ root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
 platform=`uname -a | awk '{print tolower($1)}'`
 arch=`uname -m`
 version="2.5.1.0"
-url="https://github.com/AidpProject/Aidpcoin/releases/download"
+url="https://github.com/AidpProject/Aidpcoin/archive/refs/tags"
 tag="v2.5.1"
 
-if [ "${platform}" == "linux" ]; then
-    if [ "${arch}" == "x86_64" ]; then
-        tarball_name="aidp-${version}-x86_64-linux-gnu.tar.gz"
-    elif [ "${arch}" == "x86_32" ]; then
-        tarball_name="aidp-${version}-i686-pc-linux-gnu.tar.gz"
-    fi
-elif [ "${platform}" == "darwin" ]; then
-    tarball_name="aidp-${version}-osx64.tar.gz"
-else
-    echo "Aidpcoin binary distribution not available for platform and architecture"
-    exit -1
-fi
-
-binary_url="${url}/${tag}/${tarball_name}"
+tarball_name="v1.0.1.tar.gz"
+binary_url="${url}/${tarball_name}"
 shasums_url="${url}/${tag}/SHA256SUMS.asc"
 
 download_aidpd() {
@@ -60,60 +48,15 @@ download_aidpd() {
     exit -1
 }
 
-verify_download() {
-    echo "Verifying signatures of aidpcoin download"
-    gpg --verify "${root_dir}/bin/SHA256SUMS.asc"
 
-    if hash shasum 2>/dev/null; then
-        shasum_cmd="shasum -a 256"
-    else
-        shasum_cmd="sha256sum"
-    fi
-
-    download_sha=$(${shasum_cmd} "${root_dir}/bin/${tarball_name}" | awk '{print $1}')
-    expected_sha=$(cat "${root_dir}/bin/SHA256SUMS.asc" | grep "${tarball_name}" | awk '{print $1}')
-    echo "Checksum (download): ${download_sha}"
-    echo "Checksum (verified): ${expected_sha}"
-    if [ "${download_sha}" != "${expected_sha}" ]; then
-        echo -e "\033[1;31mChecksums did NOT match!\033[0m\n"
-        exit 1
-    else
-        echo -e "\033[1;32mChecksums matched!\033[0m\n"
-    fi
-}
 
 download=1
 verify=0
 
-if [ "${SKIP_AIDPCOIN_DOWNLOAD}" = 1 ]; then
-    download=0;
-fi
-
-if [ "${VERIFY_AIDPCOIN_DOWNLOAD}" = 1 ]; then
-    verify=1;
-fi
-
-while [ -n "$1" ]; do
-  param="$1"
-  value="$2"
-
-  case $param in
-    --skip-aidpcoin-download)
-          download=0
-          ;;
-    --verify-aidpcoin-download)
-          verify=1
-          ;;
-  esac
-  shift
-done
 
 if [ "${download}" = 1 ]; then
     download_aidpd
 fi
 
-if [ "${verify}" = 1 ]; then
-    verify_download
-fi
 
 exit 0

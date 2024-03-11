@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "async": "2.6.2",
-    "aidpd-rpc": "AidpProject/aidpd-rpc",
+    "aidpcoin-rpc": "AidpProject/aidpcoin-rpc",
     "aidpcore-lib": "AidpProject/aidpcore-lib",
     "body-parser": "1.18.3",
     "colors": "1.3.3",

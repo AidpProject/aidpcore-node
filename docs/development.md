@@ -59,8 +59,8 @@ We now will setup symlinks in `aidpcore-node` *(repeat this for any other module
 cd node_modules
 rm -rf aidpcore-lib
 ln -s ~/aidpcore-lib
-rm -rf aidpcoin-rpc
-ln -s ~/aidpcoin-rpc
+rm -rf aidpd-rpc
+ln -s ~/aidpd-rpc
 ```
 
 And if you're compiling or developing aidpcoin:

@@ -632,7 +632,7 @@ describe('Aidpcoin Service', function() {
   });
 
   describe('#_wrapRPCError', function() {
-    it('will convert aidpcoin-rpc error object into JavaScript error', function() {
+    it('will convert aidpd-rpc error object into JavaScript error', function() {
       var aidpd = new AidpcoinService(baseConfig);
       var error = aidpd._wrapRPCError({message: 'Test error', code: -1});
       error.should.be.an.instanceof(errors.RPCError);

@@ -21,7 +21,7 @@ var aidpd;
 var should = chai.should();
 var assert = chai.assert;
 var sinon = require('sinon');
-var AidpcoinRPC = require('aidpcoin-rpc');
+var AidpcoinRPC = require('aidpd-rpc');
 var transactionData = [];
 var blockHashes = [];
 var txs = [];

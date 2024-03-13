@@ -6,10 +6,10 @@ root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
 platform=`uname -a | awk '{print tolower($1)}'`
 arch=`uname -m`
 version="2.5.1.0"
-url="https://github.com/AidpProject/Aidpcoin/archive/refs/tags"
+url="https://github.com/AidpProject/Aidpcoin/releases/download/v2.5.1.0"
 tag="v2.5.1"
 
-tarball_name="v1.0.1.tar.gz"
+tarball_name="aidp-2.5.1.0.tar.gz"
 binary_url="${url}/${tarball_name}"
 shasums_url="${url}/${tag}/SHA256SUMS.asc"
 

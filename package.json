@@ -30,6 +30,7 @@
     "async": "2.6.2",
     "aidpd-rpc": "AidpProject/aidpd-rpc",
     "aidpcore-lib": "AidpProject/aidpcore-lib",
+    "insight-api": "AidpProject/insight-api",
     "insight-ui": "AidpProject/insight-ui",
     "body-parser": "1.18.3",
     "colors": "1.3.3",

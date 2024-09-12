@@ -54,7 +54,7 @@ There are several add-on services available to extend the functionality of Aidpc
 
 ## Contributing
 
-Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/AidpProject/aidpcore/blob/master/CONTRIBUTING.md) file.
+Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/AidpProject/Aidpcoin/blob/master/CONTRIBUTING.md) file.
 
 ## License
 
